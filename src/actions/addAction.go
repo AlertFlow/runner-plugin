@@ -5,19 +5,13 @@ import (
 	"net/rpc"
 )
 
-func AddAction(client *rpc.Client) (err error) {
-	type Args struct {
-		Name string
-		Type string
-	}
+type Args struct {
+	Name string
+	Type string
+}
 
+func AddAction(client *rpc.Client, args Args) (err error) {
 	var reply string
-
-	// Create a new instance of Args and assign it to the args variable
-	args := Args{
-		Name: "Logs",
-		Type: "logs",
-	}
 
 	err = client.Call("Action.RegisterAction", args, &reply)
 	if err != nil {
