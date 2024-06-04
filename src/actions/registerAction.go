@@ -1,16 +1,18 @@
 package actions
 
 import (
+	"encoding/json"
 	"log"
 	"net/rpc"
 )
 
 type Args struct {
-	Name string
-	Type string
+	Name   string
+	Type   string
+	Fields json.RawMessage
 }
 
-func AddAction(client *rpc.Client, args Args) (err error) {
+func RegisterAction(client *rpc.Client, args Args) (err error) {
 	var reply string
 
 	err = client.Call("Action.RegisterAction", args, &reply)
